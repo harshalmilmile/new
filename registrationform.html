@@ -4,52 +4,98 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>forum form</title>
+    <script type="text/javascript">
+        function conditions()
+        {
+
+            var name = document.getElementById("fname").value;
+            var email = document.getElementById("email").value;
+            var gender = document.getElementsById("gender");
+            var USN = document.getElementById("sid").value;
+            var mobile = document.getElementById("mobno").value; 
+            var password = document.getElementById("pass").value;
+            var flag=1;
+
+            //validation for name
+            if(name == ""){     
+                document.getElementById('fname').innerHTML="Please Enter your Name";
+                flag = 0;
+            }
+            if(!isNaN(name)){
+                document.getElementById('fname').innerHTML="Only Aplhabates are allowed to enter";
+                flag = 0;
+            }
+
+            //validation for email
+            if(email == ""){     
+                document.getElementById('email').innerHTML="Please Enter your email Id";
+                flag = 0;
+            }
+            
+            //validation for genders
+            if(gender[0].checked == false && gender[1].checked == false){
+		        msg[1] = "Select Gender";
+		        flag = 0;
+	        } else { msg[1] = ""; }
+
+        }
+
+    </script>
+    
 </head>
-<div class="container">
-    <div class="header">
-        <h2>Registration Form</h2>
-    </div>
-    <form class="form" id="form">
-        <div class="form-control">
-            <label>Username : </label>
-            <input type="text" name="" id="username" placeholder="Enter your username">
-            <small>Error MSG</small>
-            <br><br>
-        </div>
-        <div class="form-control">
-            <label>Email : </label>
-            <input type="Email" name="" id="email" placeholder="Enter your Email">
-            <small>Error MSG</small>
-            <br><br>
-        </div>
-        <div class="form-control">
-            <label>Gender : </label>
-            <input type="radio" name="gender" value="Male" /> Male
-        	<input type="radio" name="gender" value="Female" /> Female
-        </div>
-        <div class="form-control">
-            <label>Mobile Number : </label>
-            <input type="number" name="" id="phone" placeholder="Enter your Mobile Number">
-            <small>Error MSG</small>
-            <br><br>
-        </div>
-        <div class="form-control">
-            <label>Password : </label>
-            <input type="password" name="" id="password" placeholder="Enter your Password">
-            <small>Error MSG</small>
-            <br><br>
-        </div>
-        <div class="form-control">
-            <label>Confirm Password : </label>
-            <input type="password" name="" id="cfpassword" placeholder="Enter your Password again">
-            <small>Error MSG</small>
-            <br><br>
-        </div>
-        <input type="submit" value="Submit" class="button" name="">
-    </form>
-</div>
 <body>
+<div align="center">
+    
+    <br />
+    <br />
+    
+    <span class="SubHead">Registration Form For Departmental Forum Activities</span>
+    <br />
+    
+    <form method="post" action="" onsubmit="return conditions()">
+    <table border="0" cellpadding="5" cellspacing="4" class="table">
+    <tr>
+        <td>Name : </td>
+        <td><input type="text" name="name"  id="fname" placeholder="Enter Full name" size="25" /></td>
+    </tr>
+    <tr>
+        <td>Email ID : </td>
+        <td><input type="email" name="email" id="email" placeholder="Enter Email ID"  size="25" /></td>
+    </tr>
+    <tr>
+        <td>Gender : </td>
+        <td><input type="radio" name="gender" value="Male" /> Male
+            <input type="radio" name="gender" value="Female" /> Female</td>
+        </tr>
+    <tr>
+        <td>USN No : </td>
+        <td><input type="text" name="id" id="sid" placeholder="Enter Student USN No."  size="25" /></td>
+    </tr>
+    <tr>
+        <td>Mobile No. : </td>
+        <td><input type="number" name="no" id="mobno" placeholder="Enter Mobile Number"  size="25" /></td>
+    </tr>
+    <tr>
+        <td>Password : </td><td><input type="password" name="pass"  id="pass" placeholder="Enter Password"  size="25" /></td>
+    </tr>
+    <br />
+    <br />
+    <tr><td colspan="2" align="center"><input type="submit" value="Register" />
+        <input type="reset" value="Clear" /></td></tr>
+    
+
+    </table>
+    </form>
+    <br />
+    <footer align="center">
+        <h>&copy; Harshal Milmile | Department of Electrical Engineering</h>
+        <p>USN No. : EE20034 | SBJITMR</p>
+    </footer>
+    <br />
+    <br />
+
+</div>
     
 </body>
 </html>
