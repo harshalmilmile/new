@@ -1,59 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>forum form</title>
-    <script type="text/javascript">
-        function conditions()
+	<title>Elan forum form</title>
+	<style type="text/css">
+		body{
+			background: #200122;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #6f0000, #200122);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #6f0000, #200122); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+		}
+		.main{
+			position: fixed;
+			width: 500px;
+			background: transparent;
+			border: 3px solid #FFF;
+			border-radius: 10px;
+			left: 450px;
+			color: #FFF;
+		}
+        .register{
+             background-color: #4CAF50;
+             color: white;
+             text-align: center;
+             text-decoration: none;
+             display: inline-block;
+             font-size: 14px;
+             margin: 4px 2px;
+             
+        }
+         .clear{
+             background-color: #f44336;
+             color: white;
+             text-align: center;
+             text-decoration: none;
+             display: inline-block;
+             font-size: 14px;
+             margin: 4px 2px;
+             
+        }
+	</style>
+	    <script type="text/javascript">
+        function condition()
         {
 
             var name = document.getElementById("fname").value;
             var email = document.getElementById("email").value;
-            var gender = document.getElementsById("gender");
+            var gender = document.getElementsByName("gender");
             var USN = document.getElementById("sid").value;
             var mobile = document.getElementById("mobno").value; 
             var password = document.getElementById("pass").value;
+            var msg = new Array();
+            var message = "";
+            var x;
             var flag=1;
 
             //validation for name
-            if(name == ""){     
-                document.getElementById('fname').innerHTML="Please Enter your Name";
+            if(name == ""){
+            	msg[0]= "Please Enter your Name";
                 flag = 0;
             }
-            if(!isNaN(name)){
-                document.getElementById('fname').innerHTML="Only Aplhabates are allowed to enter";
+            else if(!isNaN(name)){
+                msg[0]= "Only Aplhabates are allowed to enter";
                 flag = 0;
+            }
+            else{
+                msg[0]="";
             }
 
             //validation for email
             if(email == ""){     
-                document.getElementById('email').innerHTML="Please Enter your email Id";
+                msg[1]= "Please Enter your email Id";
                 flag = 0;
+            }
+            else if(emails.indexOf('@')<=0){
+                msg[1]= "Invalid email Id";
+                flag = 0;
+            }
+            else{
+                msg[1]="";
             }
             
             //validation for genders
             if(gender[0].checked == false && gender[1].checked == false){
-		        msg[1] = "Select Gender";
+		        msg[2]="Select Your Gender";
 		        flag = 0;
-	        } else { msg[1] = ""; }
+	        } 
+            else{
+                msg[2]="";
+            }
+
+            //validation for USN no.
+            if(USN == ""){
+                msg[3]="Please Enter your USN no.";
+                flag = 0;
+            }else{
+                msg[3]="";
+            }
+
+            //validation for Mobile No.
+            if(mobile == ""){
+                msg[4]="Please Enter your Mobile No.";
+                flag = 0;
+            }
+            else if(isNaN(mobile)){
+                msg[4]="Only Digits are allowed";
+                flag = 0;
+            }
+            else if(mobile.length!=14){
+                msg[4]="There must be 10 digit no.";
+                flag = 0;
+            }else{
+                msg[4]="";
+            }
+
+            //validation for password
+            if(password==""){
+                msg[5]="Please Enter password";
+                flag = 0;
+            }
+            else if(password.length <8){
+                msg[5]="Password must be 8 characters long";
+                flag = 0;
+            }
+            else{
+                msg[5]="";
+            }
+
+            //condition for displaying msg
+            if(flag==0){
+            
+            //display msg
+            //alert(msg[0]+'\n'+msg[1]+'\n'+msg[2]+'\n'+msg[3]+'\n'+msg[4]+'\n'+msg[5]+'\n');
+            for(x=0;x<=5;x++){
+                if(msg[x]!="")
+                {
+                    message += msg[x] + "\n";
+                }
+            }
+            alert(message);
+            return false;
+                
+            }
+            else
+            {
+                return true;
+            }
 
         }
 
     </script>
-    
+
 </head>
 <body>
-<div align="center">
-    
-    <br />
-    <br />
-    
-    <span class="SubHead">Registration Form For Departmental Forum Activities</span>
-    <br />
-    
-    <form method="post" action="" onsubmit="return conditions()">
+	<div align="center" class="main">
+
+    <h1>Registration Form For Departmental Forum Activities</h1>
+    <form method="post" action="action.html" onsubmit="return condition()">
     <table border="0" cellpadding="5" cellspacing="4" class="table">
     <tr>
         <td>Name : </td>
@@ -74,17 +176,22 @@
     </tr>
     <tr>
         <td>Mobile No. : </td>
-        <td><input type="number" name="no" id="mobno" placeholder="Enter Mobile Number"  size="25" /></td>
+        <td><input type="number" name="no" id="mobno" value="" placeholder="Enter Mobile Number"  size="25" /></td>
     </tr>
     <tr>
-        <td>Password : </td><td><input type="password" name="pass"  id="pass" placeholder="Enter Password"  size="25" /></td>
+        <td>Password : </td>
+        <td><input type="password" name="pass" id="pass" placeholder="Enter Password"  size="25" /></td>
     </tr>
-    <br />
-    <br />
-    <tr><td colspan="2" align="center"><input type="submit" value="Register" />
-        <input type="reset" value="Clear" /></td></tr>
-    
-
+    <br>
+    <br>
+    <tr><td colspan="5" align="center"><input type="submit" class="register" value="Register" onclick="condition()" id="register"/>
+        <input type="reset" class="clear" value="Clear" /></td>
+    </tr>
+    <br><br><br>
+    <tr>
+        <td> Github : </td>
+        <td><a href="https://github.com/harshalmilmile/new">Go to Github</a></td>
+    </tr>
     </table>
     </form>
     <br />
@@ -92,10 +199,7 @@
         <h>&copy; Harshal Milmile | Department of Electrical Engineering</h>
         <p>USN No. : EE20034 | SBJITMR</p>
     </footer>
-    <br />
-    <br />
-
 </div>
-    
+ <div class="ans" id="ans"></div>
 </body>
 </html>
